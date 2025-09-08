@@ -8,7 +8,7 @@ class SolutionRecord:
     Data regarding a specific position in a sequential game.
     """
     value: Value
-    sol: dict[int, value]
+    sol: dict[int, Value]
 
 
 class Solver:
@@ -21,7 +21,7 @@ class Solver:
         a dictionary (and other information we may care about).
         """
         #Ex: make run ARGS="zero_by 10 1 2"
-        current = game.start(game)
+        current = game.start()
         Solver.solve_helper(current, game)
 
         #Think about memoizing later
