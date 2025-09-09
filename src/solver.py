@@ -25,17 +25,35 @@ class Solver:
 
     @staticmethod
     def solve_helper(current, game):
-        next = game.get_moves(current)
-        Solver.sol[current] = game.terminal_value(current)
-        if not next:
-            val = game.terminal_value(current)
-            Solver.sol[current] = SolutionRecord(val)
-            print(f"{current}: {val.value}")
+        if current in Solver.sol:
+            #print(f"{current} : {Solver.sol[current].value}")
+            #return Solver.sol[current].value
             return
+
+        next_moves = game.get_moves(current)
+        if not next_moves:
+            val = game.terminal_value(current)
+        else:
+            # Solve children first (post-order traversal)
+            child_values = [Solver.solve_helper(n, game) for n in next_moves]
+            val = Value.WIN if any(v == Value.LOSE for v in child_values) else Value.LOSE
+
+        Solver.sol[current] = SolutionRecord(value=val)
+        print(f"{current}: {val.value}")
+        return val
+"""
+    @staticmethod
+    def solve_helper(current, game):
+        next = game.get_moves(current)
+        if current in Solver.sol:
+            print(f"{current} : {Solver.sol[current].value}")
+
+        else:
+            Solver.sol[current] = game.terminal_value(current)
 
         #Solve Children First
         for n in next:
-            if n not in Solver.sol:
-                Solver.solve_helper(n, game)
+            Solver.solve_helper(n, game)
 
         print(f"{current}: {Solver.sol[current].value}")
+"""

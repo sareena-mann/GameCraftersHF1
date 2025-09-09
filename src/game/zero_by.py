@@ -1,9 +1,7 @@
 from game.template import Game, Value
 
 class ZeroBy(Game):
-
     def __init__(self, args: list[str]):
-        # Example: ARGS="zero_by 10 1 2"
         self.args = args
         self.steps = args[1:]
 
@@ -24,11 +22,6 @@ class ZeroBy(Game):
         return 0
 
     def terminal_value(self, position: int) -> Value:
-        # get_moves and check: All W children --> LOSE  // at least 1 L children --> WIN
-        outcomes = self.get_moves(position)
-        for pos in outcomes:
-            if pos == 0:
-                return Value.WIN
-            elif self.terminal_value(pos) == Value.LOSE:
-                return Value.WIN
+        if position == 0:
+            return Value.WIN
         return Value.LOSE
