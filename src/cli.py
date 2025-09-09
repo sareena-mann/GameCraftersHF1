@@ -58,8 +58,10 @@ class Cli:
 
     @staticmethod
     def format(solution: dict[int, SolutionRecord]) -> None:
-        Cli.__format_individual(solution)
-        Cli.__format_aggregate(solution)
+        #Cli.__format_individual(solution)
+        #Cli.__format_aggregate(solution)
+        for pos in sorted(solution.keys(), reverse=True):
+            print(f"{pos}: {solution[pos].value.value}")
 
     @staticmethod
     def __format_individual(solution: dict[int, SolutionRecord]) -> None:
