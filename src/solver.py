@@ -18,7 +18,7 @@ class Solver:
         returns a mapping of their encodings to their game-theoretic values in
         a dictionary (and other information we may care about).
         """
-        Solver.sol.clear()
+        #Solver.sol.clear()
         start_position = game.start()
         Solver.solve_helper(start_position, game)
         return Solver.sol
@@ -30,7 +30,7 @@ class Solver:
         if not next:
             val = game.terminal_value(current)
             Solver.sol[current] = SolutionRecord(val)
-            print(f"{current}: {val}")
+            print(f"{current}: {val.value}")
             return
 
         #Solve Children First

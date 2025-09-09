@@ -14,7 +14,7 @@ class ZeroBy(Game):
         # Explore all possible places to go one step down from current position
         moves: list[int] = []
         for i in self.steps:
-            if int(i) < position:
+            if int(i) <= position:
                 moves.append(position - int(i))
         return moves
 
